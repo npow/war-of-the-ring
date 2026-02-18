@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Sundering War</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header id="game-header">
+    <div class="header-left">
+      <h1 class="game-title">The Sundering War</h1>
+    </div>
+    <div class="header-center">
+      <span id="turn-display">Turn 1</span>
+      <span class="header-sep">&bull;</span>
+      <span id="phase-display">Setup</span>
+      <span class="header-sep">&bull;</span>
+      <span id="active-player" class="active-player dawn">Dawn Covenant</span>
+    </div>
+    <div class="header-right">
+      <span id="hunt-box-display">Hunt: 0 &#9673;</span>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <div id="game-layout">
+    <!-- Left Panel: Dawn Info -->
+    <aside id="dawn-panel" class="side-panel dawn-side">
+      <div class="panel-header">
+        <h2>&#9728; Dawn Covenant</h2>
+        <div id="dawn-vp" class="vp-display">0 / 4 VP</div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Action Dice</h3>
+        <div id="dawn-dice" class="dice-tray"></div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Pilgrimage</h3>
+        <div class="fellowship-info">
+          <div class="corruption-row">
+            <span class="label">Shadow Taint:</span>
+            <div id="corruption-display" class="corruption-track"></div>
+          </div>
+          <div class="companions-row">
+            <span class="label">Companions:</span>
+            <div id="companions-display" class="companions-list"></div>
+          </div>
+          <div id="guide-display" class="guide-info"></div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Event Cards</h3>
+        <div id="dawn-cards" class="card-hand"></div>
+      </div>
+    </aside>
+
+    <!-- Center: Map -->
+    <main id="map-area">
+      <div id="map-container">
+        <svg id="map-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
+        <div id="region-tooltip" class="tooltip"></div>
+      </div>
+
+      <!-- Action Bar -->
+      <div id="action-bar">
+        <div id="status-message">Welcome to The Sundering War.</div>
+        <div id="action-menu" class="action-menu" style="display:none;"></div>
+        <div id="phase-prompt" class="phase-prompt" style="display:none;"></div>
+        <div id="unit-selection" class="unit-selection" style="display:none;"></div>
+      </div>
+    </main>
+
+    <!-- Right Panel: Dusk Info -->
+    <aside id="dusk-panel" class="side-panel dusk-side">
+      <div class="panel-header">
+        <h2>&#9673; Dusk Dominion</h2>
+        <div id="dusk-vp" class="vp-display">0 / 10 VP</div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Action Dice</h3>
+        <div id="dusk-dice" class="dice-tray"></div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Dusk Cards</h3>
+        <div id="dusk-cards-count" class="dusk-card-count"></div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Political Tracks</h3>
+        <div id="political-tracks" class="political-container"></div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Game Log</h3>
+        <div id="game-log" class="game-log"></div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Combat Panel (overlay) -->
+  <div id="combat-panel" class="combat-overlay" style="display:none;"></div>
+
+  <!-- Victory Overlay -->
+  <div id="victory-overlay" class="victory-overlay" style="display:none;"></div>
+
+  <!-- Scripts (order matters) -->
+  <script src="js/data.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
