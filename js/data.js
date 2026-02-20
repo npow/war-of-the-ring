@@ -1,91 +1,91 @@
 // ============================================================
-// THE SUNDERING WAR - Game Data
-// A strategic board game of epic conflict
+// WAR OF THE RING - Game Data
+// A digital adaptation of the classic board game
 // ============================================================
 window.GAME = window.GAME || {};
 
 // ---- NATIONS ----
 GAME.Nations = {
-  // Dawn Covenant nations
-  frosthold:  { name: 'Frosthold',       side: 'dawn', politicalStart: 1, color: '#4a7c59', maxPolitical: 3 },
-  verdantia:  { name: 'Verdantia',       side: 'dawn', politicalStart: 2, color: '#2d6a4f', maxPolitical: 3 },
-  deepforge:  { name: 'Deepforge',       side: 'dawn', politicalStart: 2, color: '#6b5b3e', maxPolitical: 3 },
-  windmere:   { name: 'Windmere',        side: 'dawn', politicalStart: 1, color: '#5a7d2b', maxPolitical: 3 },
-  solaris:    { name: 'Solaris',          side: 'dawn', politicalStart: 1, color: '#c49a3c', maxPolitical: 3 },
-  // Dusk Dominion nations
-  obsidian:   { name: 'Obsidian Citadel', side: 'dusk', politicalStart: 3, color: '#6b1a1a', maxPolitical: 3 },
-  dusk_spire: { name: 'Blighted Spire',  side: 'dusk', politicalStart: 3, color: '#4a1942', maxPolitical: 3 },
-  southern:   { name: 'Southern Hordes',  side: 'dusk', politicalStart: 1, color: '#7a4a2a', maxPolitical: 3 },
+  // Free Peoples nations
+  frosthold:  { name: 'The North',                side: 'dawn', politicalStart: 1, color: '#4a7c59', maxPolitical: 3 },
+  verdantia:  { name: 'Elves',                    side: 'dawn', politicalStart: 2, color: '#2d6a4f', maxPolitical: 3 },
+  deepforge:  { name: 'Dwarves',                  side: 'dawn', politicalStart: 2, color: '#8a7040', maxPolitical: 3 },
+  windmere:   { name: 'Rohan',                    side: 'dawn', politicalStart: 1, color: '#6a8a2b', maxPolitical: 3 },
+  solaris:    { name: 'Gondor',                    side: 'dawn', politicalStart: 1, color: '#3a6a9a', maxPolitical: 3 },
+  // Shadow nations
+  obsidian:   { name: 'Sauron',                    side: 'dusk', politicalStart: 3, color: '#8a1a1a', maxPolitical: 3 },
+  dusk_spire: { name: 'Isengard',                  side: 'dusk', politicalStart: 3, color: '#5a4a5a', maxPolitical: 3 },
+  southern:   { name: 'Southrons & Easterlings',   side: 'dusk', politicalStart: 1, color: '#8a5a2a', maxPolitical: 3 },
 };
 
 // ---- MAP REGIONS ----
 GAME.Regions = [
-  // FROSTHOLD (= North) - Northwest
-  { id: 'meadowshire',    name: 'Meadowshire',     x: 130, y: 345, nation: 'frosthold', settlement: 'city',       vp: 1, terrain: 'plains' },
-  { id: 'crossroads',     name: 'Crossroads',       x: 215, y: 305, nation: 'frosthold', settlement: 'town',       vp: 0, terrain: 'hills' },
-  { id: 'westfold_hills', name: 'Westfold Hills',   x: 170, y: 240, nation: 'frosthold', settlement: null,         vp: 0, terrain: 'hills' },
-  { id: 'northwatch',     name: 'Northwatch',       x: 275, y: 210, nation: 'frosthold', settlement: null,         vp: 0, terrain: 'hills' },
-  { id: 'oldwatch',       name: 'Oldwatch',         x: 235, y: 160, nation: 'frosthold', settlement: null,         vp: 0, terrain: 'plains' },
+  // THE NORTH (Shire & Arnor) - Northwest
+  { id: 'meadowshire',    name: 'The Shire',        x: 130, y: 345, nation: 'frosthold', settlement: 'city',       vp: 1, terrain: 'plains' },
+  { id: 'crossroads',     name: 'Bree',             x: 215, y: 305, nation: 'frosthold', settlement: 'town',       vp: 0, terrain: 'hills' },
+  { id: 'westfold_hills', name: 'North Downs',      x: 170, y: 240, nation: 'frosthold', settlement: null,         vp: 0, terrain: 'hills' },
+  { id: 'northwatch',     name: 'Weather Hills',    x: 275, y: 210, nation: 'frosthold', settlement: null,         vp: 0, terrain: 'hills' },
+  { id: 'oldwatch',       name: 'Fornost',          x: 235, y: 160, nation: 'frosthold', settlement: null,         vp: 0, terrain: 'plains' },
 
-  // VERDANTIA (= Elves)
-  { id: 'starfall',       name: 'Starfall',         x: 55,  y: 250, nation: 'verdantia', settlement: 'stronghold', vp: 2, terrain: 'coast' },
-  { id: 'haven',          name: 'Haven',            x: 385, y: 195, nation: 'verdantia', settlement: 'stronghold', vp: 2, terrain: 'valley' },
-  { id: 'crystal_falls',  name: 'Crystal Falls',    x: 575, y: 290, nation: 'verdantia', settlement: 'stronghold', vp: 2, terrain: 'forest' },
-  { id: 'deepwood',       name: 'Deepwood Halls',   x: 670, y: 130, nation: 'verdantia', settlement: 'stronghold', vp: 2, terrain: 'forest' },
+  // ELVES
+  { id: 'starfall',       name: 'Grey Havens',      x: 55,  y: 250, nation: 'verdantia', settlement: 'stronghold', vp: 2, terrain: 'coast' },
+  { id: 'haven',          name: 'Rivendell',        x: 385, y: 195, nation: 'verdantia', settlement: 'stronghold', vp: 2, terrain: 'valley' },
+  { id: 'crystal_falls',  name: 'Lothl\u00f3rien',  x: 575, y: 290, nation: 'verdantia', settlement: 'stronghold', vp: 2, terrain: 'forest' },
+  { id: 'deepwood',       name: 'Woodland Realm',   x: 670, y: 130, nation: 'verdantia', settlement: 'stronghold', vp: 2, terrain: 'forest' },
 
-  // DEEPFORGE (= Dwarves)
-  { id: 'blue_peaks',     name: 'Blue Peaks',       x: 60,  y: 155, nation: 'deepforge', settlement: 'stronghold', vp: 2, terrain: 'mountain' },
-  { id: 'deepforge_hold', name: 'Deepforge Hold',   x: 790, y: 80,  nation: 'deepforge', settlement: 'stronghold', vp: 2, terrain: 'mountain' },
-  { id: 'ironridge',      name: 'Ironridge',        x: 870, y: 140, nation: 'deepforge', settlement: null,         vp: 0, terrain: 'mountain' },
+  // DWARVES
+  { id: 'blue_peaks',     name: 'Ered Luin',        x: 60,  y: 155, nation: 'deepforge', settlement: 'stronghold', vp: 2, terrain: 'mountain' },
+  { id: 'deepforge_hold', name: 'Erebor',           x: 790, y: 80,  nation: 'deepforge', settlement: 'stronghold', vp: 2, terrain: 'mountain' },
+  { id: 'ironridge',      name: 'Iron Hills',       x: 870, y: 140, nation: 'deepforge', settlement: null,         vp: 0, terrain: 'mountain' },
 
-  // WINDMERE (= Rohan)
-  { id: 'stormfords',     name: 'Stormfords',       x: 415, y: 415, nation: 'windmere',  settlement: null,         vp: 0, terrain: 'fords' },
-  { id: 'windmere_city',  name: 'Windmere',         x: 475, y: 460, nation: 'windmere',  settlement: 'city',       vp: 1, terrain: 'plains' },
-  { id: 'thunder_gate',   name: 'Thunder Gate',     x: 370, y: 470, nation: 'windmere',  settlement: 'stronghold', vp: 2, terrain: 'fortress' },
+  // ROHAN
+  { id: 'stormfords',     name: 'Fords of Isen',    x: 415, y: 415, nation: 'windmere',  settlement: null,         vp: 0, terrain: 'fords' },
+  { id: 'windmere_city',  name: 'Edoras',           x: 475, y: 460, nation: 'windmere',  settlement: 'city',       vp: 1, terrain: 'plains' },
+  { id: 'thunder_gate',   name: "Helm's Deep",      x: 370, y: 470, nation: 'windmere',  settlement: 'stronghold', vp: 2, terrain: 'fortress' },
 
-  // SOLARIS (= Gondor) - South
-  { id: 'sunspire',       name: 'Sunspire',         x: 660, y: 530, nation: 'solaris',   settlement: 'stronghold', vp: 2, terrain: 'city' },
-  { id: 'bridgewatch',    name: 'Bridgewatch',      x: 725, y: 490, nation: 'solaris',   settlement: null,         vp: 0, terrain: 'ruins' },
-  { id: 'pearl_harbor',   name: 'Pearl Harbor',     x: 490, y: 575, nation: 'solaris',   settlement: 'stronghold', vp: 2, terrain: 'coast' },
-  { id: 'rivermount',     name: 'Rivermount',       x: 565, y: 620, nation: 'solaris',   settlement: 'city',       vp: 1, terrain: 'river' },
-  { id: 'greendale',      name: 'Greendale',        x: 500, y: 535, nation: 'solaris',   settlement: null,         vp: 0, terrain: 'hills' },
-  { id: 'brightfields',   name: 'Brightfields',     x: 595, y: 485, nation: 'solaris',   settlement: null,         vp: 0, terrain: 'plains' },
-  { id: 'vale_of_erech',  name: 'Vale of Erech',    x: 420, y: 510, nation: 'solaris',   settlement: null,         vp: 0, terrain: 'valley' },
-  { id: 'silverwood',     name: 'Silverwood',       x: 720, y: 420, nation: 'solaris',   settlement: null,         vp: 0, terrain: 'forest' },
+  // GONDOR - South
+  { id: 'sunspire',       name: 'Minas Tirith',     x: 660, y: 530, nation: 'solaris',   settlement: 'stronghold', vp: 2, terrain: 'city' },
+  { id: 'bridgewatch',    name: 'Osgiliath',        x: 725, y: 490, nation: 'solaris',   settlement: null,         vp: 0, terrain: 'ruins' },
+  { id: 'pearl_harbor',   name: 'Dol Amroth',       x: 490, y: 575, nation: 'solaris',   settlement: 'stronghold', vp: 2, terrain: 'coast' },
+  { id: 'rivermount',     name: 'Pelargir',         x: 565, y: 620, nation: 'solaris',   settlement: 'city',       vp: 1, terrain: 'river' },
+  { id: 'greendale',      name: 'Lossarnach',       x: 500, y: 535, nation: 'solaris',   settlement: null,         vp: 0, terrain: 'hills' },
+  { id: 'brightfields',   name: 'Ithilien',         x: 595, y: 485, nation: 'solaris',   settlement: null,         vp: 0, terrain: 'plains' },
+  { id: 'vale_of_erech',  name: 'Erech',            x: 420, y: 510, nation: 'solaris',   settlement: null,         vp: 0, terrain: 'valley' },
+  { id: 'silverwood',     name: 'Emyn Muil',        x: 720, y: 420, nation: 'solaris',   settlement: null,         vp: 0, terrain: 'forest' },
 
   // Neutral/Passage regions
-  { id: 'ridgepass',      name: 'Ridgepass',        x: 370, y: 370, nation: null,         settlement: null,         vp: 0, terrain: 'pass' },
+  { id: 'ridgepass',      name: 'Gap of Rohan',     x: 370, y: 370, nation: null,         settlement: null,         vp: 0, terrain: 'pass' },
   { id: 'high_pass',      name: 'High Pass',        x: 345, y: 250, nation: null,         settlement: null,         vp: 0, terrain: 'mountain' },
   { id: 'eregion',        name: 'Eregion',          x: 355, y: 305, nation: null,         settlement: null,         vp: 0, terrain: 'hills' },
-  { id: 'ancient_wood',   name: 'Ancient Wood',     x: 500, y: 340, nation: null,         settlement: null,         vp: 0, terrain: 'forest' },
+  { id: 'ancient_wood',   name: 'Fangorn',          x: 500, y: 340, nation: null,         settlement: null,         vp: 0, terrain: 'forest' },
   { id: 'parth_galen',    name: 'Parth Galen',      x: 595, y: 365, nation: null,         settlement: null,         vp: 0, terrain: 'lake' },
   { id: 'dale',           name: 'Dale',             x: 755, y: 140, nation: null,         settlement: 'town',       vp: 0, terrain: 'town' },
 
-  // DUSK_SPIRE (= Isengard)
-  { id: 'blighted_spire', name: 'Blighted Spire',   x: 455, y: 330, nation: 'dusk_spire', settlement: 'stronghold', vp: 2, terrain: 'tower' },
+  // ISENGARD
+  { id: 'blighted_spire', name: 'Orthanc',          x: 455, y: 330, nation: 'dusk_spire', settlement: 'stronghold', vp: 2, terrain: 'tower' },
 
-  // OBSIDIAN (= Mordor/Sauron)
-  { id: 'dark_mines',     name: 'Dark Mines',       x: 420, y: 260, nation: 'obsidian',  settlement: 'stronghold', vp: 2, terrain: 'mountain' },
-  { id: 'shadow_keep',    name: 'Shadow Keep',      x: 700, y: 260, nation: 'obsidian',  settlement: 'stronghold', vp: 2, terrain: 'forest' },
-  { id: 'iron_gate',      name: 'Iron Gate',        x: 870, y: 405, nation: 'obsidian',  settlement: 'stronghold', vp: 2, terrain: 'fortress' },
-  { id: 'dread_spire',    name: 'Dread Spire',      x: 815, y: 500, nation: 'obsidian',  settlement: 'stronghold', vp: 2, terrain: 'fortress' },
-  { id: 'ashlands',       name: 'Ashlands',         x: 965, y: 430, nation: 'obsidian',  settlement: null,         vp: 0, terrain: 'wasteland' },
-  { id: 'obsidian_citadel', name: 'Obsidian Citadel', x: 1040, y: 380, nation: 'obsidian', settlement: 'stronghold', vp: 2, terrain: 'fortress' },
-  { id: 'abyssal_forge',  name: 'Abyssal Forge',    x: 995, y: 470, nation: 'obsidian',  settlement: null,         vp: 0, terrain: 'volcano' },
-  { id: 'dark_marshes',   name: 'Dark Marshes',     x: 830, y: 365, nation: 'obsidian',  settlement: null,         vp: 0, terrain: 'marsh' },
+  // SAURON (Mordor)
+  { id: 'dark_mines',     name: 'Moria',            x: 420, y: 260, nation: 'obsidian',  settlement: 'stronghold', vp: 2, terrain: 'mountain' },
+  { id: 'shadow_keep',    name: 'Dol Guldur',       x: 700, y: 260, nation: 'obsidian',  settlement: 'stronghold', vp: 2, terrain: 'forest' },
+  { id: 'iron_gate',      name: 'Morannon',         x: 870, y: 405, nation: 'obsidian',  settlement: 'stronghold', vp: 2, terrain: 'fortress' },
+  { id: 'dread_spire',    name: 'Minas Morgul',     x: 815, y: 500, nation: 'obsidian',  settlement: 'stronghold', vp: 2, terrain: 'fortress' },
+  { id: 'ashlands',       name: 'Gorgoroth',        x: 965, y: 430, nation: 'obsidian',  settlement: null,         vp: 0, terrain: 'wasteland' },
+  { id: 'obsidian_citadel', name: 'Barad-d\u00fbr', x: 1040, y: 380, nation: 'obsidian', settlement: 'stronghold', vp: 2, terrain: 'fortress' },
+  { id: 'abyssal_forge',  name: 'Mount Doom',       x: 995, y: 470, nation: 'obsidian',  settlement: null,         vp: 0, terrain: 'volcano' },
+  { id: 'dark_marshes',   name: 'Dead Marshes',     x: 830, y: 365, nation: 'obsidian',  settlement: null,         vp: 0, terrain: 'marsh' },
   { id: 'nurn',           name: 'Nurn',             x: 985, y: 530, nation: 'obsidian',  settlement: null,         vp: 0, terrain: 'plains' },
 
-  // SOUTHERN HORDES (= Southrons & Easterlings)
-  { id: 'corsair_port',   name: 'Corsair Port',     x: 645, y: 650, nation: 'southern',  settlement: 'stronghold', vp: 2, terrain: 'coast' },
-  { id: 'southern_sands', name: 'Southern Sands',   x: 755, y: 630, nation: 'southern',  settlement: 'city',       vp: 1, terrain: 'desert' },
-  { id: 'deep_desert',    name: 'Deep Desert',      x: 845, y: 670, nation: 'southern',  settlement: 'city',       vp: 1, terrain: 'desert' },
-  { id: 'steppes',        name: 'The Steppes',      x: 905, y: 265, nation: 'southern',  settlement: 'city',       vp: 1, terrain: 'steppe' },
-  { id: 'eastern_wastes', name: 'Eastern Wastes',   x: 965, y: 310, nation: 'southern',  settlement: 'city',       vp: 1, terrain: 'wasteland' },
+  // SOUTHRONS & EASTERLINGS
+  { id: 'corsair_port',   name: 'Umbar',            x: 645, y: 650, nation: 'southern',  settlement: 'stronghold', vp: 2, terrain: 'coast' },
+  { id: 'southern_sands', name: 'Near Harad',       x: 755, y: 630, nation: 'southern',  settlement: 'city',       vp: 1, terrain: 'desert' },
+  { id: 'deep_desert',    name: 'Far Harad',        x: 845, y: 670, nation: 'southern',  settlement: 'city',       vp: 1, terrain: 'desert' },
+  { id: 'steppes',        name: 'Rh\u00fbn',        x: 905, y: 265, nation: 'southern',  settlement: 'city',       vp: 1, terrain: 'steppe' },
+  { id: 'eastern_wastes', name: 'East Rh\u00fbn',   x: 965, y: 310, nation: 'southern',  settlement: 'city',       vp: 1, terrain: 'wasteland' },
 ];
 
 // ---- MAP CONNECTIONS ----
 GAME.Connections = [
-  // Frosthold internal
+  // The North internal
   ['starfall', 'blue_peaks'],
   ['starfall', 'meadowshire'],
   ['blue_peaks', 'westfold_hills'],
@@ -99,7 +99,7 @@ GAME.Connections = [
   ['northwatch', 'haven'],
   ['oldwatch', 'haven'],
 
-  // Haven area
+  // Rivendell area
   ['haven', 'high_pass'],
   ['haven', 'eregion'],
   ['high_pass', 'dark_mines'],
@@ -188,28 +188,28 @@ GAME.Connections = [
 
 // ---- CHARACTERS ----
 GAME.Characters = {
-  // Dawn Covenant Companions (Fellowship)
-  the_bearer:      { name: 'The Bearer',       side: 'dawn', type: 'companion', level: 0, leadership: 0, startsWith: 'fellowship', ability: 'ring_bearer', nation: null },
-  the_stalwart:    { name: 'The Stalwart',      side: 'dawn', type: 'companion', level: 0, leadership: 0, startsWith: 'fellowship', ability: 'loyal_guard', nation: null },
-  the_heir:        { name: 'The Heir',          side: 'dawn', type: 'companion', level: 3, leadership: 2, startsWith: 'fellowship', ability: 'rightful_king', nation: 'solaris' },
-  the_archon:      { name: 'The Archon',        side: 'dawn', type: 'companion', level: 3, leadership: 1, startsWith: 'fellowship', ability: 'arcane_power', nation: null },
-  the_forest_lord: { name: 'The Forest Lord',   side: 'dawn', type: 'companion', level: 2, leadership: 1, startsWith: 'fellowship', ability: 'keen_eye', nation: 'verdantia' },
-  the_stone_king:  { name: 'The Stone King',    side: 'dawn', type: 'companion', level: 2, leadership: 1, startsWith: 'fellowship', ability: 'stout_heart', nation: 'deepforge' },
-  the_shield_captain: { name: 'Shield Captain', side: 'dawn', type: 'companion', level: 2, leadership: 1, startsWith: 'fellowship', ability: 'valor', nation: 'solaris' },
-  the_wanderer:    { name: 'The Wanderer',      side: 'dawn', type: 'companion', level: 1, leadership: 1, startsWith: 'fellowship', ability: 'scouting', nation: 'frosthold' },
+  // Free Peoples Companions (Fellowship)
+  the_bearer:      { name: 'Frodo',             side: 'dawn', type: 'companion', level: 0, leadership: 0, startsWith: 'fellowship', ability: 'ring_bearer', nation: null },
+  the_stalwart:    { name: 'Sam',               side: 'dawn', type: 'companion', level: 0, leadership: 0, startsWith: 'fellowship', ability: 'loyal_guard', nation: null },
+  the_heir:        { name: 'Strider',           side: 'dawn', type: 'companion', level: 3, leadership: 2, startsWith: 'fellowship', ability: 'rightful_king', nation: 'solaris' },
+  the_archon:      { name: 'Gandalf the Grey',  side: 'dawn', type: 'companion', level: 3, leadership: 1, startsWith: 'fellowship', ability: 'arcane_power', nation: null },
+  the_forest_lord: { name: 'Legolas',           side: 'dawn', type: 'companion', level: 2, leadership: 1, startsWith: 'fellowship', ability: 'keen_eye', nation: 'verdantia' },
+  the_stone_king:  { name: 'Gimli',             side: 'dawn', type: 'companion', level: 2, leadership: 1, startsWith: 'fellowship', ability: 'stout_heart', nation: 'deepforge' },
+  the_shield_captain: { name: 'Boromir',        side: 'dawn', type: 'companion', level: 2, leadership: 1, startsWith: 'fellowship', ability: 'valor', nation: 'solaris' },
+  the_wanderer:    { name: 'Pippin',            side: 'dawn', type: 'companion', level: 1, leadership: 1, startsWith: 'fellowship', ability: 'scouting', nation: 'frosthold' },
 
-  // Dawn characters (not in fellowship)
-  the_shield_maiden: { name: 'Shield Maiden',   side: 'dawn', type: 'character', level: 2, leadership: 1, startsWith: null, ability: 'fearless', nation: 'windmere' },
-  the_tree_shepherd: { name: 'Tree Shepherd',   side: 'dawn', type: 'character', level: 3, leadership: 0, startsWith: null, ability: 'ancient_wrath', nation: null },
+  // Free Peoples characters (not in fellowship)
+  the_shield_maiden: { name: '\u00c9owyn',      side: 'dawn', type: 'character', level: 2, leadership: 1, startsWith: null, ability: 'fearless', nation: 'windmere' },
+  the_tree_shepherd: { name: 'Treebeard',       side: 'dawn', type: 'character', level: 3, leadership: 0, startsWith: null, ability: 'ancient_wrath', nation: null },
 
-  // Dusk Dominion characters
-  the_witch_lord:  { name: 'The Witch Lord',    side: 'dusk', type: 'seeker',    level: 3, leadership: 2, startsWith: 'dread_spire', ability: 'terror' },
-  seeker_2:        { name: 'Shadow Seeker',     side: 'dusk', type: 'seeker',    level: 2, leadership: 1, startsWith: 'dread_spire', ability: null },
-  seeker_3:        { name: 'Dark Rider',        side: 'dusk', type: 'seeker',    level: 2, leadership: 1, startsWith: 'obsidian_citadel', ability: null },
-  seeker_4:        { name: 'Night Hunter',      side: 'dusk', type: 'seeker',    level: 1, leadership: 1, startsWith: 'shadow_keep', ability: null },
-  seeker_5:        { name: 'Pale Watcher',      side: 'dusk', type: 'seeker',    level: 1, leadership: 1, startsWith: 'iron_gate', ability: null },
-  the_betrayer:    { name: 'The Betrayer',      side: 'dusk', type: 'character', level: 3, leadership: 1, startsWith: 'blighted_spire', ability: 'corruption' },
-  the_baleful:     { name: 'The Baleful',       side: 'dusk', type: 'character', level: 3, leadership: 0, startsWith: 'dark_mines', ability: 'flame_shadow' },
+  // Shadow characters
+  the_witch_lord:  { name: 'The Witch-king',    side: 'dusk', type: 'seeker',    level: 3, leadership: 2, startsWith: 'dread_spire', ability: 'terror' },
+  seeker_2:        { name: 'Nazg\u00fbl',       side: 'dusk', type: 'seeker',    level: 2, leadership: 1, startsWith: 'dread_spire', ability: null },
+  seeker_3:        { name: 'Nazg\u00fbl',       side: 'dusk', type: 'seeker',    level: 2, leadership: 1, startsWith: 'obsidian_citadel', ability: null },
+  seeker_4:        { name: 'Nazg\u00fbl',       side: 'dusk', type: 'seeker',    level: 1, leadership: 1, startsWith: 'shadow_keep', ability: null },
+  seeker_5:        { name: 'Kham\u00fbl',       side: 'dusk', type: 'seeker',    level: 1, leadership: 1, startsWith: 'iron_gate', ability: null },
+  the_betrayer:    { name: 'Saruman',           side: 'dusk', type: 'character', level: 3, leadership: 1, startsWith: 'blighted_spire', ability: 'corruption' },
+  the_baleful:     { name: 'The Balrog',        side: 'dusk', type: 'character', level: 3, leadership: 0, startsWith: 'dark_mines', ability: 'flame_shadow' },
 };
 
 // ---- ACTION DICE FACES ----
@@ -225,12 +225,12 @@ GAME.DiceIcons = {
   event: '\u2605',          // Star
   will_of_the_west: '\u2600', // Sun (wild)
   army_muster: '\u265F\u2691', // Combined
-  eye: '\u25C9',            // Eye
+  eye: '\u25C9',            // Eye of Sauron
 };
 
 // ---- INITIAL ARMY SETUP ----
 GAME.InitialArmies = {
-  // Dawn forces
+  // Free Peoples forces
   haven:          { dawn: { regular: 2, elite: 0, leaders: 0, nazgul: 0 } },
   starfall:       { dawn: { regular: 1, elite: 0, leaders: 0, nazgul: 0 } },
   blue_peaks:     { dawn: { regular: 1, elite: 1, leaders: 0, nazgul: 0 } },
@@ -246,7 +246,7 @@ GAME.InitialArmies = {
   rivermount:     { dawn: { regular: 1, elite: 0, leaders: 0, nazgul: 0 } },
   bridgewatch:    { dawn: { regular: 2, elite: 0, leaders: 0, nazgul: 0 } },
 
-  // Dusk forces
+  // Shadow forces
   blighted_spire:   { dusk: { regular: 4, elite: 1, leaders: 0, nazgul: 0 } },
   dark_mines:       { dusk: { regular: 2, elite: 0, leaders: 0, nazgul: 0 } },
   shadow_keep:      { dusk: { regular: 3, elite: 1, leaders: 0, nazgul: 1 } },
@@ -305,48 +305,48 @@ GAME.ShadowRegions = ['dark_mines', 'shadow_keep', 'iron_gate', 'dread_spire', '
 // ---- EVENT CARDS ----
 GAME.EventCards = {
   dawn: [
-    { id: 'dc1',  name: 'Light of the Archon',   type: 'character', text: 'Remove 1 corruption from the Pilgrimage.', effect: 'remove_corruption', value: 1 },
-    { id: 'dc2',  name: 'Ride of the Windmere',  type: 'army',      text: 'Move 2 Windmere armies for free.', effect: 'free_move', nation: 'windmere', value: 2 },
-    { id: 'dc3',  name: 'The Heir Revealed',      type: 'character', text: 'Advance Solaris political track by 2.', effect: 'advance_political', nation: 'solaris', value: 2, condition: 'heir_separated' },
-    { id: 'dc4',  name: 'Deepforge Stands',       type: 'army',      text: 'Add 2 elite units to any Deepforge settlement.', effect: 'reinforce', nation: 'deepforge', unitType: 'elite', value: 2 },
-    { id: 'dc5',  name: 'Ancient Alliance',        type: 'muster',    text: 'Advance Verdantia and Deepforge political tracks by 1.', effect: 'advance_political_multi', nations: ['verdantia', 'deepforge'], value: 1 },
-    { id: 'dc6',  name: 'Secret Paths',            type: 'character', text: 'Move the Pilgrimage 2 steps without a hunt roll.', effect: 'safe_move', value: 2 },
-    { id: 'dc7',  name: 'Rally of the Free',       type: 'muster',    text: 'Muster troops in any 2 Dawn settlements.', effect: 'double_muster' },
-    { id: 'dc8',  name: 'Tree Shepherds Awaken',   type: 'event',     text: 'Destroy all Dusk units in Ancient Wood. Place Tree Shepherd there.', effect: 'tree_shepherd', region: 'ancient_wood' },
-    { id: 'dc9',  name: 'Shield Wall',             type: 'combat',    text: 'In battle: All your regulars hit on 4+ this round.', effect: 'combat_boost', hitOn: 4 },
-    { id: 'dc10', name: 'Heroic Charge',           type: 'combat',    text: 'In battle: Deal 2 automatic hits.', effect: 'auto_hits', value: 2 },
-    { id: 'dc11', name: 'Fortify the Gate',        type: 'army',      text: 'Add 3 regular units to any Dawn stronghold.', effect: 'reinforce_stronghold', value: 3 },
-    { id: 'dc12', name: 'Hope Endures',            type: 'event',     text: 'Remove 2 corruption from the Pilgrimage.', effect: 'remove_corruption', value: 2, condition: 'corruption_gte_4' },
-    { id: 'dc13', name: 'Starfall Fleet',          type: 'army',      text: 'Move any Dawn army to a coastal region.', effect: 'sea_move' },
-    { id: 'dc14', name: 'Vigilant Watch',          type: 'character', text: 'Cancel one hunt result. Draw a new tile.', effect: 'cancel_hunt' },
-    { id: 'dc15', name: 'Breaking of the Spire',   type: 'event',     text: 'If Blighted Spire is Dawn-controlled, remove The Betrayer.', effect: 'remove_betrayer', condition: 'blighted_spire_dawn' },
-    { id: 'dc16', name: 'Desperate Valor',         type: 'combat',    text: 'In battle: Re-roll all misses once.', effect: 'reroll_misses' },
-    { id: 'dc17', name: 'Pearl Harbor Rally',      type: 'muster',    text: 'Recruit 2 regular and 1 elite in Pearl Harbor.', effect: 'specific_reinforce', region: 'pearl_harbor', regular: 2, elite: 1 },
-    { id: 'dc18', name: 'Frosthold Rangers',       type: 'character', text: 'Place 2 Frosthold regulars in any region with a Dawn character.', effect: 'ranger_ambush', nation: 'frosthold', value: 2 },
-    { id: 'dc19', name: 'Defiance',                type: 'combat',    text: 'In siege: Defender rolls +2 dice this round.', effect: 'siege_defense', value: 2 },
-    { id: 'dc20', name: 'Swift Journey',           type: 'character', text: 'Move the Pilgrimage 3 steps. Hunt rolls are at -1.', effect: 'swift_journey', value: 3 },
+    { id: 'dc1',  name: "Gandalf's Staff",        type: 'character', text: 'Remove 1 corruption from the Fellowship.', effect: 'remove_corruption', value: 1 },
+    { id: 'dc2',  name: 'Ride of the Rohirrim',   type: 'army',      text: 'Move 2 Rohan armies for free.', effect: 'free_move', nation: 'windmere', value: 2 },
+    { id: 'dc3',  name: "Aragorn's Claim",        type: 'character', text: 'Advance Gondor political track by 2.', effect: 'advance_political', nation: 'solaris', value: 2, condition: 'heir_separated' },
+    { id: 'dc4',  name: 'Dwarves Rally',          type: 'army',      text: 'Add 2 elite units to any Dwarven settlement.', effect: 'reinforce', nation: 'deepforge', unitType: 'elite', value: 2 },
+    { id: 'dc5',  name: 'The Last Alliance',      type: 'muster',    text: 'Advance Elves and Dwarves political tracks by 1.', effect: 'advance_political_multi', nations: ['verdantia', 'deepforge'], value: 1 },
+    { id: 'dc6',  name: 'Secret Paths',           type: 'character', text: 'Move the Fellowship 2 steps without a hunt roll.', effect: 'safe_move', value: 2 },
+    { id: 'dc7',  name: 'Rally of the Free',      type: 'muster',    text: 'Muster troops in any 2 Free Peoples settlements.', effect: 'double_muster' },
+    { id: 'dc8',  name: 'Ents Awaken',            type: 'event',     text: 'Destroy all Shadow units in Fangorn. Place Treebeard there.', effect: 'tree_shepherd', region: 'ancient_wood' },
+    { id: 'dc9',  name: 'Shield Wall',            type: 'combat',    text: 'In battle: All your regulars hit on 4+ this round.', effect: 'combat_boost', hitOn: 4 },
+    { id: 'dc10', name: 'Heroic Charge',          type: 'combat',    text: 'In battle: Deal 2 automatic hits.', effect: 'auto_hits', value: 2 },
+    { id: 'dc11', name: 'Fortify the Walls',      type: 'army',      text: 'Add 3 regular units to any Free Peoples stronghold.', effect: 'reinforce_stronghold', value: 3 },
+    { id: 'dc12', name: 'Hope Endures',           type: 'event',     text: 'Remove 2 corruption from the Fellowship.', effect: 'remove_corruption', value: 2, condition: 'corruption_gte_4' },
+    { id: 'dc13', name: 'Grey Havens Fleet',      type: 'army',      text: 'Move any Free Peoples army to a coastal region.', effect: 'sea_move' },
+    { id: 'dc14', name: 'Vigilant Watch',         type: 'character', text: 'Cancel one hunt result. Draw a new tile.', effect: 'cancel_hunt' },
+    { id: 'dc15', name: 'Breaking of Isengard',   type: 'event',     text: 'If Orthanc is Free Peoples-controlled, remove Saruman.', effect: 'remove_betrayer', condition: 'blighted_spire_dawn' },
+    { id: 'dc16', name: 'Desperate Valor',        type: 'combat',    text: 'In battle: Re-roll all misses once.', effect: 'reroll_misses' },
+    { id: 'dc17', name: 'Dol Amroth Rally',       type: 'muster',    text: 'Recruit 2 regular and 1 elite in Dol Amroth.', effect: 'specific_reinforce', region: 'pearl_harbor', regular: 2, elite: 1 },
+    { id: 'dc18', name: 'Rangers of the North',   type: 'character', text: 'Place 2 Northern regulars in any region with a Free Peoples character.', effect: 'ranger_ambush', nation: 'frosthold', value: 2 },
+    { id: 'dc19', name: 'Defiance',               type: 'combat',    text: 'In siege: Defender rolls +2 dice this round.', effect: 'siege_defense', value: 2 },
+    { id: 'dc20', name: 'Swift Journey',          type: 'character', text: 'Move the Fellowship 3 steps. Hunt rolls are at -1.', effect: 'swift_journey', value: 3 },
   ],
   dusk: [
-    { id: 'sc1',  name: 'Shadow Grows',           type: 'event',     text: 'Add 1 corruption to the Pilgrimage.', effect: 'add_corruption', value: 1 },
-    { id: 'sc2',  name: 'Seekers Unleashed',      type: 'character', text: 'Move all Seekers up to 2 regions each.', effect: 'move_seekers', value: 2 },
-    { id: 'sc3',  name: 'Mustering of the Hordes', type: 'muster',   text: 'Recruit 3 regulars in each Dusk stronghold.', effect: 'mass_muster', value: 3 },
-    { id: 'sc4',  name: 'Corruption Spreads',     type: 'event',     text: 'Add 2 corruption to the Pilgrimage.', effect: 'add_corruption', value: 2, condition: 'corruption_gte_3' },
-    { id: 'sc5',  name: 'Betrayer\'s Voice',      type: 'character', text: 'Reduce a Dawn nation\'s political track by 1.', effect: 'reduce_political', value: 1 },
-    { id: 'sc6',  name: 'Siege Engines',           type: 'combat',    text: 'In siege: Attacker deals 3 automatic hits.', effect: 'auto_hits', value: 3 },
-    { id: 'sc7',  name: 'Dark Ritual',            type: 'event',     text: 'Place 2 elite Dusk units in Obsidian Citadel.', effect: 'reinforce', region: 'obsidian_citadel', unitType: 'elite', value: 2 },
-    { id: 'sc8',  name: 'Relentless Assault',     type: 'army',      text: 'Move 2 Dusk armies. Each can attack.', effect: 'double_attack' },
-    { id: 'sc9',  name: 'Terror of the Witch Lord', type: 'combat',  text: 'In battle: Eliminate 1 Dawn leader before combat.', effect: 'eliminate_leader' },
-    { id: 'sc10', name: 'The Eye Sees All',       type: 'event',     text: 'Reveal the Pilgrimage. Add 1 corruption.', effect: 'reveal_fellowship' },
-    { id: 'sc11', name: 'Southern March',          type: 'army',      text: 'Advance Southern Hordes political track by 2.', effect: 'advance_political', nation: 'southern', value: 2 },
-    { id: 'sc12', name: 'Dread and Despair',       type: 'event',     text: 'A Dawn nation at war reduces by 1 political step.', effect: 'reduce_political_war', value: 1 },
-    { id: 'sc13', name: 'Blinding Speed',          type: 'army',      text: 'Move one Dusk army 3 regions instead of 2.', effect: 'fast_march', value: 3 },
-    { id: 'sc14', name: 'Orc Horde',              type: 'muster',    text: 'Place 4 regular units in Iron Gate.', effect: 'specific_reinforce', region: 'iron_gate', regular: 4, elite: 0 },
-    { id: 'sc15', name: 'Shadow of Fear',          type: 'combat',    text: 'In battle: Dawn must retreat or take 2 extra hits.', effect: 'fear_retreat', value: 2 },
-    { id: 'sc16', name: 'Poisoned Whispers',       type: 'character', text: 'Remove one Dawn companion from the Pilgrimage.', effect: 'remove_companion' },
-    { id: 'sc17', name: 'Iron Fist',              type: 'muster',    text: 'Recruit in all Dusk settlements with armies.', effect: 'total_muster' },
-    { id: 'sc18', name: 'Corsair Raiders',         type: 'army',      text: 'Move Corsair army to any coastal Dawn region.', effect: 'corsair_raid' },
+    { id: 'sc1',  name: 'Shadow Grows',           type: 'event',     text: 'Add 1 corruption to the Fellowship.', effect: 'add_corruption', value: 1 },
+    { id: 'sc2',  name: 'Nazg\u00fbl Unleashed',  type: 'character', text: 'Move all Nazg\u00fbl up to 2 regions each.', effect: 'move_seekers', value: 2 },
+    { id: 'sc3',  name: 'Mustering of the Hordes', type: 'muster',   text: 'Recruit 3 regulars in each Shadow stronghold.', effect: 'mass_muster', value: 3 },
+    { id: 'sc4',  name: 'Corruption Spreads',     type: 'event',     text: 'Add 2 corruption to the Fellowship.', effect: 'add_corruption', value: 2, condition: 'corruption_gte_3' },
+    { id: 'sc5',  name: "Saruman's Voice",        type: 'character', text: "Reduce a Free Peoples nation's political track by 1.", effect: 'reduce_political', value: 1 },
+    { id: 'sc6',  name: 'Siege Engines',          type: 'combat',    text: 'In siege: Attacker deals 3 automatic hits.', effect: 'auto_hits', value: 3 },
+    { id: 'sc7',  name: 'Dark Ritual',            type: 'event',     text: 'Place 2 elite Shadow units in Barad-d\u00fbr.', effect: 'reinforce', region: 'obsidian_citadel', unitType: 'elite', value: 2 },
+    { id: 'sc8',  name: 'Relentless Assault',     type: 'army',      text: 'Move 2 Shadow armies. Each can attack.', effect: 'double_attack' },
+    { id: 'sc9',  name: 'Terror of the Witch-king', type: 'combat',  text: 'In battle: Eliminate 1 Free Peoples leader before combat.', effect: 'eliminate_leader' },
+    { id: 'sc10', name: 'The Eye Sees All',       type: 'event',     text: 'Reveal the Fellowship. Add 1 corruption.', effect: 'reveal_fellowship' },
+    { id: 'sc11', name: 'Southern March',         type: 'army',      text: 'Advance Southrons & Easterlings political track by 2.', effect: 'advance_political', nation: 'southern', value: 2 },
+    { id: 'sc12', name: 'Dread and Despair',      type: 'event',     text: 'A Free Peoples nation at war reduces by 1 political step.', effect: 'reduce_political_war', value: 1 },
+    { id: 'sc13', name: 'Blinding Speed',         type: 'army',      text: 'Move one Shadow army 3 regions instead of 2.', effect: 'fast_march', value: 3 },
+    { id: 'sc14', name: 'Orc Horde',              type: 'muster',    text: 'Place 4 regular units in Morannon.', effect: 'specific_reinforce', region: 'iron_gate', regular: 4, elite: 0 },
+    { id: 'sc15', name: 'Shadow of Fear',         type: 'combat',    text: 'In battle: Free Peoples must retreat or take 2 extra hits.', effect: 'fear_retreat', value: 2 },
+    { id: 'sc16', name: 'Poisoned Whispers',      type: 'character', text: 'Remove one companion from the Fellowship.', effect: 'remove_companion' },
+    { id: 'sc17', name: 'Iron Fist',              type: 'muster',    text: 'Recruit in all Shadow settlements with armies.', effect: 'total_muster' },
+    { id: 'sc18', name: 'Corsair Raiders',        type: 'army',      text: 'Move Corsair army to any coastal Free Peoples region.', effect: 'corsair_raid' },
     { id: 'sc19', name: 'Dark Sorcery',           type: 'combat',    text: 'In battle: All your elites hit on 4+ this round.', effect: 'combat_boost', hitOn: 4 },
-    { id: 'sc20', name: 'The Dark One\'s Will',   type: 'event',     text: 'Place 2 Eye results in the hunt box.', effect: 'extra_hunt', value: 2 },
+    { id: 'sc20', name: "Sauron's Will",          type: 'event',     text: 'Place 2 Eye results in the hunt box.', effect: 'extra_hunt', value: 2 },
   ],
 };
 
@@ -359,9 +359,9 @@ GAME.StackingLimits = {
 
 // ---- VICTORY CONDITIONS ----
 GAME.VictoryConditions = {
-  dawnMilitaryVP: 4,      // VP needed for Dawn military victory
-  duskMilitaryVP: 10,     // VP needed for Dusk military victory
-  maxCorruption: 12,      // Corruption that defeats Dawn
+  dawnMilitaryVP: 4,      // VP needed for Free Peoples military victory
+  duskMilitaryVP: 10,     // VP needed for Shadow military victory
+  maxCorruption: 12,      // Corruption that defeats Free Peoples
 };
 
 // ---- TERRAIN DISPLAY ----
@@ -388,9 +388,15 @@ GAME.TerrainColors = {
   river:     '#5a8a9a',
 };
 
+// ---- SIDE DISPLAY NAMES ----
+GAME.SideNames = {
+  dawn: 'Free Peoples',
+  dusk: 'Shadow',
+};
+
 // ---- SIDE COLORS ----
 GAME.SideColors = {
-  dawn: { primary: '#c49a3c', secondary: '#2a4d8f', bg: '#f0e6c8', text: '#2c1810', light: '#f5deb3' },
+  dawn: { primary: '#3a7abf', secondary: '#1a4a7f', bg: '#e8eef4', text: '#1a2a3a', light: '#b0c8e0' },
   dusk: { primary: '#8b1a1a', secondary: '#4a1942', bg: '#2a1a2a', text: '#e8d8c8', light: '#6a3a3a' },
 };
 
@@ -410,4 +416,9 @@ GAME.buildAdjacencyMap = function() {
 // Helper: get region by id
 GAME.getRegion = function(id) {
   return GAME.Regions.find(r => r.id === id);
+};
+
+// Helper: get side display name
+GAME.sideName = function(side) {
+  return GAME.SideNames[side] || side;
 };

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Sundering War</title>
+  <title>War of the Ring</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -12,26 +12,47 @@
   <!-- Header -->
   <header id="game-header">
     <div class="header-left">
-      <h1 class="game-title">The Sundering War</h1>
+      <h1 class="game-title">War of the Ring</h1>
     </div>
     <div class="header-center">
       <span id="turn-display">Turn 1</span>
-      <span class="header-sep">&bull;</span>
-      <span id="phase-display">Setup</span>
-      <span class="header-sep">&bull;</span>
-      <span id="active-player" class="active-player dawn">Dawn Covenant</span>
     </div>
     <div class="header-right">
       <span id="hunt-box-display">Hunt: 0 &#9673;</span>
     </div>
   </header>
 
+  <!-- Phase Stepper -->
+  <div id="phase-stepper">
+    <div class="phase-step" data-phase="fellowship_phase">
+      <span class="step-num">1</span>
+      <span class="step-label">Fellowship</span>
+    </div>
+    <div class="phase-step" data-phase="hunt_allocation">
+      <span class="step-num">2</span>
+      <span class="step-label">Hunt</span>
+    </div>
+    <div class="phase-step" data-phase="action_roll">
+      <span class="step-num">3</span>
+      <span class="step-label">Roll Dice</span>
+    </div>
+    <div class="phase-step" data-phase="action_resolution">
+      <span class="step-num">4</span>
+      <span class="step-label">Actions</span>
+    </div>
+  </div>
+
+  <!-- Active Player Banner -->
+  <div id="active-player-banner" class="dawn">
+    <span id="active-player-text">YOUR TURN &mdash; Free Peoples</span>
+  </div>
+
   <!-- Main Layout -->
   <div id="game-layout">
-    <!-- Left Panel: Dawn Info -->
+    <!-- Left Panel: Free Peoples Info -->
     <aside id="dawn-panel" class="side-panel dawn-side">
       <div class="panel-header">
-        <h2>&#9728; Dawn Covenant</h2>
+        <h2>&#9876; Free Peoples</h2>
         <div id="dawn-vp" class="vp-display">0 / 4 VP</div>
       </div>
 
@@ -41,10 +62,10 @@
       </div>
 
       <div class="panel-section">
-        <h3>Pilgrimage</h3>
+        <h3>The Fellowship</h3>
         <div class="fellowship-info">
           <div class="corruption-row">
-            <span class="label">Shadow Taint:</span>
+            <span class="label">Corruption:</span>
             <div id="corruption-display" class="corruption-track"></div>
           </div>
           <div class="companions-row">
@@ -70,17 +91,17 @@
 
       <!-- Action Bar -->
       <div id="action-bar">
-        <div id="status-message">Welcome to The Sundering War.</div>
+        <div id="status-message">Welcome to War of the Ring.</div>
         <div id="action-menu" class="action-menu" style="display:none;"></div>
         <div id="phase-prompt" class="phase-prompt" style="display:none;"></div>
         <div id="unit-selection" class="unit-selection" style="display:none;"></div>
       </div>
     </main>
 
-    <!-- Right Panel: Dusk Info -->
+    <!-- Right Panel: Shadow Info -->
     <aside id="dusk-panel" class="side-panel dusk-side">
       <div class="panel-header">
-        <h2>&#9673; Dusk Dominion</h2>
+        <h2>&#9673; Shadow</h2>
         <div id="dusk-vp" class="vp-display">0 / 10 VP</div>
       </div>
 
@@ -90,7 +111,7 @@
       </div>
 
       <div class="panel-section">
-        <h3>Dusk Cards</h3>
+        <h3>Shadow Cards</h3>
         <div id="dusk-cards-count" class="dusk-card-count"></div>
       </div>
 

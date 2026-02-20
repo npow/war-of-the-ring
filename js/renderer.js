@@ -1,5 +1,5 @@
 // ============================================================
-// THE SUNDERING WAR - Renderer
+// WAR OF THE RING - Renderer
 // Handles all visual rendering of the game
 // ============================================================
 window.GAME = window.GAME || {};
@@ -136,7 +136,7 @@ GAME.Renderer = (function() {
       // Background glow for settlements
       if (isSettlement) {
         const glowR = isStronghold ? 22 : 18;
-        const glowCol = side === 'dawn' ? '#c49a3c' : side === 'dusk' ? '#8b1a1a' : '#8a8a6a';
+        const glowCol = side === 'dawn' ? '#3a7abf' : side === 'dusk' ? '#8b1a1a' : '#8a8a6a';
         g.appendChild(svgEl('circle', {
           cx: 0, cy: 0, r: glowR,
           fill: glowCol, opacity: 0.1,
@@ -251,7 +251,7 @@ GAME.Renderer = (function() {
     const cartG = svgEl('g', { transform: 'translate(950, 680)', 'pointer-events': 'none' });
     cartG.appendChild(svgEl('rect', { x: -80, y: -15, width: 160, height: 30, fill: '#d4c090', stroke: '#8a7a50', 'stroke-width': 1, rx: 4, opacity: 0.8 }));
     const cartText = svgEl('text', { x: 0, y: 5, 'text-anchor': 'middle', fill: '#3a2a1a', 'font-size': '10', 'font-family': 'Cinzel, Georgia, serif', 'font-weight': '600' });
-    cartText.textContent = 'The Sundering War';
+    cartText.textContent = 'War of the Ring';
     cartG.appendChild(cartText);
     mapSvg.appendChild(cartG);
   }
@@ -367,7 +367,7 @@ GAME.Renderer = (function() {
 
       // Control indicator ring
       if (region.controlled) {
-        const sideCol = region.controlled === 'dawn' ? '#c49a3c' : '#8b1a1a';
+        const sideCol = region.controlled === 'dawn' ? '#3a7abf' : '#8b1a1a';
         const size = r.settlement === 'stronghold' ? 18 : r.settlement === 'city' ? 15 : r.settlement === 'town' ? 12 : 10;
         g.insertBefore(svgEl('circle', {
           cx: 0, cy: 0, r: size,
@@ -455,8 +455,8 @@ GAME.Renderer = (function() {
 
   function drawUnitBadge(parent, total, side, offsetX, offsetY, units) {
     const isDawn = side === 'dawn';
-    const bgColor = isDawn ? '#c49a3c' : '#8b1a1a';
-    const borderColor = isDawn ? '#8a6a1a' : '#5a0a0a';
+    const bgColor = isDawn ? '#3a7abf' : '#8b1a1a';
+    const borderColor = isDawn ? '#1a4a7a' : '#5a0a0a';
     const hasElite = units.elite > 0;
 
     const ug = svgEl('g', {
@@ -537,6 +537,52 @@ GAME.Renderer = (function() {
     });
   }
 
+  // ---- PHASE STEPPER ----
+  const PHASE_ORDER = ['fellowship_phase', 'hunt_allocation', 'action_roll', 'action_resolution'];
+
+  function updatePhaseStepper(phase) {
+    const steps = document.querySelectorAll('.phase-step');
+    if (!steps.length) return;
+
+    // Combat and game_over happen during action_resolution, keep stepper on Actions
+    const effectivePhase = (phase === 'combat' || phase === 'game_over') ? 'action_resolution' : phase;
+    const currentIndex = PHASE_ORDER.indexOf(effectivePhase);
+
+    steps.forEach(step => {
+      const stepPhase = step.getAttribute('data-phase');
+      const stepIndex = PHASE_ORDER.indexOf(stepPhase);
+
+      step.classList.remove('active', 'completed');
+
+      if (stepIndex >= 0 && currentIndex >= 0) {
+        if (stepPhase === effectivePhase) {
+          step.classList.add('active');
+        } else if (stepIndex < currentIndex) {
+          step.classList.add('completed');
+        }
+      }
+    });
+  }
+
+  // ---- ACTIVE BANNER ----
+  function updateActiveBanner(gameState) {
+    const banner = document.getElementById('active-player-banner');
+    if (!banner) return;
+
+    const side = gameState.activePlayer;
+    const sideName = GAME.sideName(side);
+    const isAI = side === 'dusk' && gameState.isAI;
+
+    banner.className = 'active-player-banner ' + side;
+
+    if (isAI) {
+      banner.classList.add('ai-acting');
+      banner.textContent = 'SHADOW IS ACTING...';
+    } else {
+      banner.textContent = 'YOUR TURN \u2014 ' + sideName;
+    }
+  }
+
   // ---- UI PANEL UPDATES ----
   function updateDiceDisplay(gameState) {
     const dawnDiceEl = document.getElementById('dawn-dice');
@@ -591,7 +637,7 @@ GAME.Renderer = (function() {
     const phaseEl = document.getElementById('phase-display');
     if (phaseEl) {
       const names = {
-        setup: 'Setup', fellowship_phase: 'Pilgrimage Phase',
+        setup: 'Setup', fellowship_phase: 'Fellowship Phase',
         hunt_allocation: 'Hunt Allocation', action_roll: 'Roll Dice',
         action_resolution: 'Actions', combat: 'Combat!', game_over: 'Game Over',
       };
@@ -605,7 +651,7 @@ GAME.Renderer = (function() {
     // Active player
     const activeEl = document.getElementById('active-player');
     if (activeEl) {
-      activeEl.textContent = gameState.activePlayer === 'dawn' ? 'Dawn Covenant' : 'Dusk Dominion';
+      activeEl.textContent = GAME.sideName(gameState.activePlayer);
       activeEl.className = `active-player ${gameState.activePlayer}`;
     }
 
@@ -666,8 +712,28 @@ GAME.Renderer = (function() {
       duskCardsEl.textContent = `${hand} cards in hand`;
     }
 
+    // Active panel highlighting
+    const dawnPanel = document.getElementById('dawn-panel');
+    const duskPanel = document.getElementById('dusk-panel');
+    if (dawnPanel) {
+      if (gameState.activePlayer === 'dawn') {
+        dawnPanel.classList.add('active-panel');
+      } else {
+        dawnPanel.classList.remove('active-panel');
+      }
+    }
+    if (duskPanel) {
+      if (gameState.activePlayer === 'dusk') {
+        duskPanel.classList.add('active-panel');
+      } else {
+        duskPanel.classList.remove('active-panel');
+      }
+    }
+
     updatePoliticalDisplay(gameState);
     updateCardsDisplay(gameState);
+    updatePhaseStepper(gameState.phase);
+    updateActiveBanner(gameState);
   }
 
   function updatePoliticalDisplay(gameState) {
@@ -751,11 +817,11 @@ GAME.Renderer = (function() {
         line.classList.add('log-turn');
       } else if (entry.msg.includes('Battle') || entry.msg.includes('Combat')) {
         line.classList.add('log-combat');
-      } else if (entry.msg.includes('Pilgrimage') || entry.msg.includes('Hunt')) {
+      } else if (entry.msg.includes('Fellowship') || entry.msg.includes('Hunt')) {
         line.classList.add('log-fellowship');
-      } else if (entry.msg.includes('Dawn')) {
+      } else if (entry.msg.includes('Free Peoples')) {
         line.classList.add('log-dawn');
-      } else if (entry.msg.includes('Dusk')) {
+      } else if (entry.msg.includes('Shadow')) {
         line.classList.add('log-dusk');
       }
       line.textContent = entry.msg;
@@ -773,7 +839,7 @@ GAME.Renderer = (function() {
 
     const labels = {
       move_army: '\u265F Move Army',
-      move_fellowship: '\u2726 Move Pilgrimage',
+      move_fellowship: '\u2726 Move Fellowship',
       move_character: '\u2694 Move Character',
       muster_troops: '\u2691 Muster Troops',
       advance_political: '\u2690 Advance Politics',
@@ -844,8 +910,8 @@ GAME.Renderer = (function() {
     const region = gameState.regions[combatState.regionId];
     const atkSide = combatState.attacker;
     const defSide = combatState.defender;
-    const atkName = atkSide === 'dawn' ? 'Dawn Covenant' : 'Dusk Dominion';
-    const defName = defSide === 'dawn' ? 'Dawn Covenant' : 'Dusk Dominion';
+    const atkName = GAME.sideName(atkSide);
+    const defName = GAME.sideName(defSide);
 
     panel.innerHTML = `
       <div class="combat-header">\u2694 Battle at ${regionDef.name} ${combatState.isSiege ? '(Siege!)' : ''}</div>
@@ -883,7 +949,7 @@ GAME.Renderer = (function() {
     overlay.style.display = 'flex';
     overlay.innerHTML = `
       <div class="victory-content ${winner}">
-        <h1>${winner === 'dawn' ? '\u2600 Dawn Covenant Victorious! \u2600' : '\u25C9 Dusk Dominion Triumphs! \u25C9'}</h1>
+        <h1>${winner === 'dawn' ? '\u2600 Free Peoples Victorious! \u2600' : '\u25C9 Shadow Triumphs! \u25C9'}</h1>
         <p>${reason}</p>
         <button onclick="location.reload()">\u21BB Play Again</button>
       </div>
@@ -914,10 +980,10 @@ GAME.Renderer = (function() {
     const dawnU = region.dawn;
     const duskU = region.dusk;
     if (dawnU.regular + dawnU.elite + dawnU.leaders > 0) {
-      html += `<div class="tip-dawn">\u2600 Dawn: ${dawnU.regular}R ${dawnU.elite}E ${dawnU.leaders}L</div>`;
+      html += `<div class="tip-dawn">\u2600 ${GAME.sideName('dawn')}: ${dawnU.regular}R ${dawnU.elite}E ${dawnU.leaders}L</div>`;
     }
     if (duskU.regular + duskU.elite + duskU.leaders + duskU.nazgul > 0) {
-      html += `<div class="tip-dusk">\u25C9 Dusk: ${duskU.regular}R ${duskU.elite}E ${duskU.leaders}L${duskU.nazgul > 0 ? ' ' + duskU.nazgul + 'S' : ''}</div>`;
+      html += `<div class="tip-dusk">\u25C9 ${GAME.sideName('dusk')}: ${duskU.regular}R ${duskU.elite}E ${duskU.leaders}L${duskU.nazgul > 0 ? ' ' + duskU.nazgul + 'S' : ''}</div>`;
     }
 
     if (region.characters.length > 0) {
@@ -926,7 +992,7 @@ GAME.Renderer = (function() {
     }
 
     if (regionId === state.fellowship.position) {
-      html += `<div class="tip-fellowship">\u2726 Pilgrimage is here${state.fellowship.revealed ? '' : ' (hidden)'}</div>`;
+      html += `<div class="tip-fellowship">\u2726 Fellowship is here${state.fellowship.revealed ? '' : ' (hidden)'}</div>`;
     }
 
     tip.innerHTML = html;
@@ -970,5 +1036,6 @@ GAME.Renderer = (function() {
     showActionMenu, hideActionMenu, showPhasePrompt, hidePhasePrompt,
     showCombatPanel, hideCombatPanel, showVictoryScreen,
     showRegionTooltip, hideRegionTooltip, fullUpdate,
+    updatePhaseStepper, updateActiveBanner,
   };
 })();

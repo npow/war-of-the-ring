@@ -1,6 +1,6 @@
 // ============================================================
-// THE SUNDERING WAR - AI Opponent
-// Basic AI for the Dusk Dominion
+// WAR OF THE RING - AI Opponent
+// Basic AI for the Shadow forces
 // ============================================================
 window.GAME = window.GAME || {};
 

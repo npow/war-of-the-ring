@@ -1,5 +1,5 @@
 // ============================================================
-// THE SUNDERING WAR - UI Controller
+// WAR OF THE RING - UI Controller
 // Handles user interactions and game flow
 // ============================================================
 window.GAME = window.GAME || {};
@@ -74,7 +74,7 @@ GAME.UI = (function() {
         if (state.isAI) {
           // Player is always Dawn
           GAME.Renderer.showPhasePrompt(
-            'Pilgrimage Phase: What does the Pilgrimage do?',
+            'Fellowship Phase: What does the Fellowship do?',
             [
               { label: '\u{1F6E1} Hide', action: 'fellowship_hide' },
               { label: '\u{1F4CD} Declare Position', action: 'fellowship_declare' },
@@ -128,7 +128,7 @@ GAME.UI = (function() {
       }, 600);
     } else {
       // Human's turn - prompt to select a die
-      updateStatusMessage('Select an action die to use.');
+      updateStatusMessage('Your turn! Select an action die to use.');
     }
   }
 
@@ -227,7 +227,7 @@ GAME.UI = (function() {
 
       case 'move_fellowship':
         if (state.activePlayer !== 'dawn') return;
-        updateStatusMessage('Select an adjacent region for the Pilgrimage.');
+        updateStatusMessage('Select an adjacent region for the Fellowship.');
         const fellowPos = state.fellowship.position;
         const targets = GAME.Engine.getAdjacent(fellowPos);
         GAME.Renderer.highlightRegions([fellowPos], '#4488ff');
@@ -433,7 +433,7 @@ GAME.UI = (function() {
     const targets = GAME.Engine.getAdjacent(fellowPos);
 
     if (!targets.includes(regionId)) {
-      updateStatusMessage('Not adjacent to the Pilgrimage!');
+      updateStatusMessage('Not adjacent to the Fellowship!');
       return;
     }
 
@@ -486,12 +486,12 @@ GAME.UI = (function() {
     );
 
     if (companions.length === 0) {
-      updateStatusMessage('No companions can leave the Pilgrimage.');
+      updateStatusMessage('No companions can leave the Fellowship.');
       return;
     }
 
     GAME.Renderer.showPhasePrompt(
-      'Separate a companion from the Pilgrimage?',
+      'Separate a companion from the Fellowship?',
       companions.map(cid => ({
         label: GAME.Characters[cid].name,
         action: 'separate_companion',

@@ -1,5 +1,5 @@
 // ============================================================
-// THE SUNDERING WAR - Main Entry Point
+// WAR OF THE RING - Main Entry Point
 // ============================================================
 window.GAME = window.GAME || {};
 
@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial status
   const statusEl = document.getElementById('status-message');
   if (statusEl) {
-    statusEl.textContent = 'The Sundering War begins! You command the Dawn Covenant.';
+    statusEl.textContent = 'The War of the Ring begins! You command the Free Peoples.';
   }
 
-  console.log('The Sundering War initialized successfully.');
+  console.log('War of the Ring initialized successfully.');
   console.log('Game state available via: window.render_game_to_text()');
 });

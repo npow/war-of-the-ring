@@ -1,5 +1,5 @@
 // ============================================================
-// THE SUNDERING WAR - Game Engine
+// WAR OF THE RING - Game Engine
 // Core game state management and rules
 // ============================================================
 window.GAME = window.GAME || {};
@@ -39,7 +39,7 @@ GAME.Engine = (function() {
       // Nations / Political
       nations: {},
 
-      // Fellowship / Pilgrimage
+      // Fellowship
       fellowship: {
         position: 'haven',
         lastKnown: 'haven',
@@ -179,9 +179,9 @@ GAME.Engine = (function() {
       if (state.duskDeck.length) state.duskHand.push(state.duskDeck.pop());
     }
 
-    addLog('The Sundering War begins. The Pilgrimage sets out from Haven.');
-    addLog('Dawn Covenant: Destroy the Shard at the Abyssal Forge.');
-    addLog('Dusk Dominion: Corrupt the Bearer or conquer the Free Lands.');
+    addLog('The War of the Ring begins. The Fellowship sets out from Rivendell.');
+    addLog('Free Peoples: Destroy the One Ring at Mount Doom.');
+    addLog('Shadow: Corrupt the Ring-bearer or conquer the Free Lands.');
 
     state.phase = 'fellowship_phase';
     emit('init', state);
@@ -200,7 +200,7 @@ GAME.Engine = (function() {
     switch (state.phase) {
       case 'fellowship_phase':
         state.phase = 'hunt_allocation';
-        addLog(`Turn ${state.turn}: Dusk allocates hunt dice.`);
+        addLog(`Turn ${state.turn}: Shadow allocates hunt dice.`);
         emit('phase_change', state.phase);
         break;
 
@@ -216,7 +216,7 @@ GAME.Engine = (function() {
         state.activePlayer = 'dawn';
         state.actionsRemaining.dawn = state.dawnDice.filter(d => !d.used).length;
         state.actionsRemaining.dusk = state.duskDice.filter(d => !d.used && d.face !== 'eye').length;
-        addLog('Action phase begins. Dawn acts first.');
+        addLog('Action phase begins. Free Peoples acts first.');
         emit('phase_change', state.phase);
         break;
 
@@ -252,8 +252,8 @@ GAME.Engine = (function() {
 
     const dawnFaces = state.dawnDice.map(d => d.face).join(', ');
     const duskFaces = state.duskDice.map(d => d.face).join(', ');
-    addLog(`Dawn rolls: ${dawnFaces}`);
-    addLog(`Dusk rolls: ${duskFaces} (${eyeCount} eye dice to hunt box)`);
+    addLog(`Free Peoples rolls: ${dawnFaces}`);
+    addLog(`Shadow rolls: ${duskFaces} (${eyeCount} eye dice to hunt box)`);
 
     emit('dice_rolled', { dawn: state.dawnDice, dusk: state.duskDice });
   }
@@ -333,7 +333,7 @@ GAME.Engine = (function() {
         break;
       case 'skip':
         success = true;
-        addLog(`${state.activePlayer === 'dawn' ? 'Dawn' : 'Dusk'} passes.`);
+        addLog(`${GAME.sideName(state.activePlayer)} passes.`);
         break;
     }
 
@@ -409,7 +409,7 @@ GAME.Engine = (function() {
     }
 
     const unitStr = Object.entries(units).filter(([_,c]) => c > 0).map(([t,c]) => `${c} ${t}`).join(', ');
-    addLog(`${side === 'dawn' ? 'Dawn' : 'Dusk'} moves ${unitStr} from ${GAME.getRegion(from).name} to ${GAME.getRegion(to).name}.`);
+    addLog(`${GAME.sideName(side)} moves ${unitStr} from ${GAME.getRegion(from).name} to ${GAME.getRegion(to).name}.`);
 
     // Check if entering enemy region -> combat
     const enemySide = side === 'dawn' ? 'dusk' : 'dawn';
@@ -448,18 +448,18 @@ GAME.Engine = (function() {
     state.fellowship.revealed = false;
     state.fellowship.inShadowLands = GAME.ShadowRegions.includes(to);
 
-    addLog(`The Pilgrimage moves secretly (${state.fellowship.progress} steps from last known position).`);
+    addLog(`The Fellowship moves secretly (${state.fellowship.progress} steps from last known position).`);
 
     // Hunt check
     resolveHunt();
 
-    // Check if reached Abyssal Forge
+    // Check if reached Mount Doom
     if (to === 'abyssal_forge') {
-      addLog('The Pilgrimage reaches the Abyssal Forge!');
+      addLog('The Fellowship reaches Mount Doom!');
       if (state.fellowship.corruption < GAME.VictoryConditions.maxCorruption) {
         state.gameOver = true;
         state.winner = 'dawn';
-        state.winReason = 'The Shard is cast into the Abyssal Forge! The Dawn Covenant is victorious!';
+        state.winReason = 'The One Ring is cast into Mount Doom! The Free Peoples are victorious!';
         emit('game_over', { winner: 'dawn', reason: state.winReason });
       }
     }
@@ -506,21 +506,21 @@ GAME.Engine = (function() {
           state.fellowship.revealed = true;
           state.fellowship.lastKnown = state.fellowship.position;
           state.fellowship.progress = 0;
-          addLog(`The Pilgrimage is revealed at ${GAME.getRegion(state.fellowship.position).name}!`);
+          addLog(`The Fellowship is revealed at ${GAME.getRegion(state.fellowship.position).name}!`);
         }
 
         // Check corruption victory
         if (state.fellowship.corruption >= GAME.VictoryConditions.maxCorruption) {
           state.gameOver = true;
           state.winner = 'dusk';
-          state.winReason = 'The Bearer is consumed by shadow! The Dusk Dominion triumphs!';
+          state.winReason = 'The Ring-bearer is consumed by shadow! The Shadow triumphs!';
           emit('game_over', { winner: 'dusk', reason: state.winReason });
         }
 
         emit('hunt_resolved', { tile, damage, rolls });
       }
     } else {
-      addLog(`Hunt: Rolled [${rolls.join(', ')}] - The Pilgrimage slips past unseen.`);
+      addLog(`Hunt: Rolled [${rolls.join(', ')}] - The Fellowship slips past unseen.`);
     }
   }
 
@@ -579,7 +579,7 @@ GAME.Engine = (function() {
       }
     }
 
-    addLog(`${charDef.name} leaves the Pilgrimage at ${GAME.getRegion(regionId).name}.`);
+    addLog(`${charDef.name} leaves the Fellowship at ${GAME.getRegion(regionId).name}.`);
 
     // Update guide if needed
     if (characterId === state.fellowship.guide) {
@@ -596,7 +596,7 @@ GAME.Engine = (function() {
     for (const id of priority) {
       if (state.fellowship.companions.includes(id)) {
         state.fellowship.guide = id;
-        addLog(`${GAME.Characters[id].name} now guides the Pilgrimage.`);
+        addLog(`${GAME.Characters[id].name} now guides the Fellowship.`);
         return;
       }
     }
@@ -649,7 +649,7 @@ GAME.Engine = (function() {
     const parts = [];
     if (regToAdd > 0) parts.push(`${regToAdd} regular`);
     if (eliteToAdd > 0) parts.push(`${eliteToAdd} elite`);
-    addLog(`${side === 'dawn' ? 'Dawn' : 'Dusk'} musters ${parts.join(' and ')} in ${regionDef.name}.`);
+    addLog(`${GAME.sideName(side)} musters ${parts.join(' and ')} in ${regionDef.name}.`);
 
     emit('mustered', { regionId, units: { regular: regToAdd, elite: eliteToAdd }, side });
     return true;
@@ -698,13 +698,13 @@ GAME.Engine = (function() {
     const hand = side === 'dawn' ? state.dawnHand : state.duskHand;
 
     if (deck.length === 0) {
-      addLog(`${side === 'dawn' ? 'Dawn' : 'Dusk'} deck is empty!`);
+      addLog(`${GAME.sideName(side)} deck is empty!`);
       return true; // Still costs the action
     }
 
     const cardId = deck.pop();
     hand.push(cardId);
-    addLog(`${side === 'dawn' ? 'Dawn' : 'Dusk'} draws a card.`);
+    addLog(`${GAME.sideName(side)} draws a card.`);
     emit('card_drawn', { side, cardId });
     return true;
   }
@@ -727,7 +727,7 @@ GAME.Engine = (function() {
 
     hand.splice(idx, 1);
     discard.push(cardId);
-    addLog(`${side === 'dawn' ? 'Dawn' : 'Dusk'} plays "${card.name}": ${card.text}`);
+    addLog(`${GAME.sideName(side)} plays "${card.name}": ${card.text}`);
     emit('card_played', { side, card });
     return true;
   }
@@ -742,7 +742,7 @@ GAME.Engine = (function() {
         if (state.fellowship.corruption >= 12) {
           state.gameOver = true;
           state.winner = 'dusk';
-          state.winReason = 'The Bearer is consumed by shadow!';
+          state.winReason = 'The Ring-bearer is consumed by shadow!';
         }
         return true;
       case 'advance_political':
@@ -872,7 +872,7 @@ GAME.Engine = (function() {
       resolved: false,
     };
 
-    addLog(`Battle at ${regionDef.name}! ${attackerSide === 'dawn' ? 'Dawn' : 'Dusk'} attacks!`);
+    addLog(`Battle at ${regionDef.name}! ${GAME.sideName(attackerSide)} attacks!`);
     state.phase = 'combat';
     emit('combat_start', state.combatState);
   }
@@ -991,10 +991,10 @@ GAME.Engine = (function() {
     const defRemaining = region[cs.defender].regular + region[cs.defender].elite;
 
     if (defRemaining <= 0 && atkRemaining > 0) {
-      addLog(`${cs.attacker === 'dawn' ? 'Dawn' : 'Dusk'} wins the battle at ${regionDef.name}!`);
+      addLog(`${GAME.sideName(cs.attacker)} wins the battle at ${regionDef.name}!`);
       updateRegionControl(cs.regionId);
     } else if (atkRemaining <= 0) {
-      addLog(`${cs.defender === 'dawn' ? 'Dawn' : 'Dusk'} successfully defends ${regionDef.name}!`);
+      addLog(`${GAME.sideName(cs.defender)} successfully defends ${regionDef.name}!`);
     } else {
       addLog(`Battle at ${regionDef.name} ends in a stalemate.`);
     }
@@ -1031,7 +1031,7 @@ GAME.Engine = (function() {
       region[side][type] = 0;
     });
 
-    addLog(`${side === 'dawn' ? 'Dawn' : 'Dusk'} retreats from ${GAME.getRegion(cs.regionId).name} to ${GAME.getRegion(retreatTo).name}.`);
+    addLog(`${GAME.sideName(side)} retreats from ${GAME.getRegion(cs.regionId).name} to ${GAME.getRegion(retreatTo).name}.`);
 
     endCombat();
     return true;
@@ -1056,17 +1056,17 @@ GAME.Engine = (function() {
     if (oldControl !== region.controlled && regionDef.vp > 0) {
       if (oldControl === 'dawn' && region.controlled === 'dusk') {
         state.duskMilitaryVP += regionDef.vp;
-        addLog(`Dusk captures ${regionDef.name} (+${regionDef.vp} VP, total: ${state.duskMilitaryVP})`);
+        addLog(`Shadow captures ${regionDef.name} (+${regionDef.vp} VP, total: ${state.duskMilitaryVP})`);
       } else if (oldControl === 'dusk' && region.controlled === 'dawn') {
         state.dawnMilitaryVP += regionDef.vp;
-        addLog(`Dawn captures ${regionDef.name} (+${regionDef.vp} VP, total: ${state.dawnMilitaryVP})`);
+        addLog(`Free Peoples captures ${regionDef.name} (+${regionDef.vp} VP, total: ${state.dawnMilitaryVP})`);
       }
 
       // Also reduce the other side's VP if they had captured this before
       if (region.controlled === 'dawn' && regionDef.nation && GAME.Nations[regionDef.nation] && GAME.Nations[regionDef.nation].side === 'dusk') {
-        // Dawn captured a Dusk settlement
+        // Free Peoples captured a Shadow settlement
       } else if (region.controlled === 'dusk' && regionDef.nation && GAME.Nations[regionDef.nation] && GAME.Nations[regionDef.nation].side === 'dawn') {
-        // Dusk captured a Dawn settlement
+        // Shadow captured a Free Peoples settlement
       }
 
       emit('control_changed', { regionId, oldControl, newControl: region.controlled });
@@ -1101,7 +1101,7 @@ GAME.Engine = (function() {
     if (state.dawnMilitaryVP >= GAME.VictoryConditions.dawnMilitaryVP) {
       state.gameOver = true;
       state.winner = 'dawn';
-      state.winReason = `Dawn Covenant military victory! (${state.dawnMilitaryVP} VP captured)`;
+      state.winReason = `Free Peoples military victory! (${state.dawnMilitaryVP} VP captured)`;
       emit('game_over', { winner: 'dawn', reason: state.winReason });
       return;
     }
@@ -1110,7 +1110,7 @@ GAME.Engine = (function() {
     if (state.duskMilitaryVP >= GAME.VictoryConditions.duskMilitaryVP) {
       state.gameOver = true;
       state.winner = 'dusk';
-      state.winReason = `Dusk Dominion military victory! (${state.duskMilitaryVP} VP captured)`;
+      state.winReason = `Shadow military victory! (${state.duskMilitaryVP} VP captured)`;
       emit('game_over', { winner: 'dusk', reason: state.winReason });
       return;
     }
@@ -1119,7 +1119,7 @@ GAME.Engine = (function() {
     if (state.fellowship.corruption >= GAME.VictoryConditions.maxCorruption) {
       state.gameOver = true;
       state.winner = 'dusk';
-      state.winReason = 'The Bearer is consumed by shadow!';
+      state.winReason = 'The Ring-bearer is consumed by shadow!';
       emit('game_over', { winner: 'dusk', reason: state.winReason });
     }
   }
@@ -1146,17 +1146,17 @@ GAME.Engine = (function() {
       case 'hide':
         if (state.fellowship.revealed) {
           state.fellowship.revealed = false;
-          addLog('The Pilgrimage hides from sight.');
+          addLog('The Fellowship hides from sight.');
         }
         break;
       case 'declare':
         state.fellowship.revealed = true;
         state.fellowship.lastKnown = state.fellowship.position;
         state.fellowship.progress = 0;
-        addLog(`Dawn declares the Pilgrimage at ${GAME.getRegion(state.fellowship.position).name}.`);
+        addLog(`Free Peoples declares the Fellowship at ${GAME.getRegion(state.fellowship.position).name}.`);
         break;
       case 'continue':
-        addLog('The Pilgrimage continues its hidden journey.');
+        addLog('The Fellowship continues its hidden journey.');
         break;
     }
 
@@ -1168,7 +1168,7 @@ GAME.Engine = (function() {
   function allocateHuntDice(count) {
     if (state.phase !== 'hunt_allocation') return false;
     state.huntDiceAllocated = Math.max(0, count);
-    addLog(`Dusk allocates ${count} additional dice to the hunt.`);
+    addLog(`Shadow allocates ${count} additional dice to the hunt.`);
     advancePhase();
     return true;
   }
