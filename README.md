@@ -1,5 +1,7 @@
 # War of the Ring
 
+[![Docs](https://img.shields.io/badge/docs-mintlify-18a34a?style=flat-square)](https://mintlify.com/npow/war-of-the-ring)
+
 A digital adaptation of the classic asymmetric strategy board game, playable in your browser. The Free Peoples defend Middle-earth and guide the Fellowship to Mount Doom, while the Shadow player musters armies and hunts the Ring-bearer. Single-player vs AI. No dependencies.
 
 ![Game Board](assets/screenshot-board.png)
